@@ -8,8 +8,7 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 
-// 2. OPTIONAL: FETCH STATS FOR SOCIAL PROOF
-// We use a try-catch block so the page still loads even if the DB has issues
+// Using a try-catch block so the page still loads even if the DB has issues
 $total_reviews = 0;
 $total_faculty = 0;
 try {
