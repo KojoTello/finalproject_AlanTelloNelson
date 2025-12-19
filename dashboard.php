@@ -41,10 +41,17 @@ $intern_result = $conn->query($intern_sql);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <nav class="navbar">
+<nav class="navbar">
         <div class="logo">Ashesi Review</div>
-        <div>
+        <div style="display:flex; align-items:center; gap:15px;">
             <span>Hi, <?php echo htmlspecialchars($_SESSION['full_name']); ?></span>
+            
+            <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                <a href="admin.php" style="color:white; text-decoration:none; font-weight:bold; border:1px solid white; padding:5px 10px; border-radius:4px;">
+                    <i class="fas fa-user-shield"></i> Admin Portal
+                </a>
+            <?php endif; ?>
+
             <a href="logout.php" class="logout-btn">Log Out</a>
         </div>
     </nav>
