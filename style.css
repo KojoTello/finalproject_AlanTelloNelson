@@ -1,0 +1,325 @@
+:root {
+    --ashesi-maroon: #701326;
+    --ashesi-gold: #D4AF37;
+    --light-gray: #f9f9f9;
+    --dark-text: #333;
+    --intern-green: #2e7d32;
+    --adjunct-orange: #ef6c00;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+body { background-color: var(--light-gray); min-height: 100vh; display: flex; flex-direction: column; }
+
+/* Navbar */
+.navbar {
+    background-color: var(--ashesi-maroon);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 100; /* Ensure nav stays on top */
+}
+.logo { font-size: 1.5rem; font-weight: bold; }
+.logout-btn { color: white; border: 1px solid white; padding: 5px 15px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; }
+.logout-btn:hover { background: white; color: var(--ashesi-maroon); }
+
+/* Toggle Switch */
+.view-toggle-container {
+    display: flex; justify-content: center; gap: 20px; background: white; padding: 15px; border-bottom: 1px solid #eee;
+}
+.toggle-btn {
+    background: none; border: none; padding: 10px 20px; font-size: 1rem; cursor: pointer; color: #777; border-radius: 30px; transition: 0.3s; font-weight: bold;
+}
+.toggle-btn.active { background: var(--ashesi-maroon); color: white; box-shadow: 0 4px 10px rgba(112, 19, 38, 0.2); }
+
+/* Filters */
+.filter-section {
+    padding: 15px 2rem; background: white; border-bottom: 1px solid #e0e0e0; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+}
+.filter-btn {
+    padding: 6px 14px; border: 1px solid #ccc; background: none; border-radius: 20px; cursor: pointer; transition: 0.2s; font-size: 0.9rem;
+}
+.filter-btn:hover { background: #eee; }
+.filter-btn.active { background: var(--dark-text); color: white; border-color: var(--dark-text); }
+
+/* Dashboard Grid */
+.dashboard-container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; width: 100%; }
+.grid-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+
+/* Card Styling */
+.card {
+    background: white; border-radius: 10px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; transition: transform 0.2s; border: 1px solid #eee; position: relative;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+/* --- NEW AVATAR STYLES (Social Media Style) --- */
+.card-left { 
+    flex-shrink: 0; 
+    position: relative; /* Anchor for the zoom */
+}
+.avatar-img { 
+    width: 50px; /* Smaller size */
+    height: 50px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 2px solid var(--ashesi-maroon);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+    cursor: pointer;
+    background: white;
+}
+
+/* The Expansion Effect */
+.avatar-img:hover {
+    transform: scale(3.5) translateX(10px); /* Grow bigger and shift slightly right */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    z-index: 999; /* Pop on top of everything */
+    position: relative;
+}
+
+/* Fallback Initials Circle */
+.avatar-circle { width: 50px; height: 50px; background: var(--ashesi-maroon); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; font-weight: bold; }
+.fi-color { background: #4a6fa5; }
+
+/* Card Text */
+.card-right { flex: 1; }
+.card h3 { font-size: 1.1rem; margin-bottom: 2px; color: #222; }
+.dept { font-size: 0.85rem; color: #666; margin-bottom: 6px; }
+
+/* Status Badge */
+.status-badge { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
+.status-badge.head-of-dept { background: #f3e5f5; color: #7b1fa2; }
+.status-badge.adjunct { background: #fff3e0; color: var(--adjunct-orange); }
+.status-badge.full-time { background: #e3f2fd; color: #1565c0; }
+.status-badge.intern { background: #e8f5e9; color: var(--intern-green); }
+
+/* --- NEW STAR RATINGS (Display) --- */
+.rating-box { margin-bottom: 10px; font-size: 0.9rem; color: #777; display: flex; align-items: center; gap: 5px; }
+.stars-display { color: #ddd; /* Gray by default */ }
+.stars-display .fa-star.filled { color: var(--ashesi-gold); }
+
+.view-btn { display: block; text-align: center; border: 1px solid var(--ashesi-maroon); color: var(--ashesi-maroon); padding: 8px; border-radius: 5px; text-decoration: none; font-weight: 600; transition: 0.2s; }
+.view-btn:hover { background: var(--ashesi-maroon); color: white; }
+.fi-btn { border-color: #4a6fa5; color: #4a6fa5; }
+.fi-btn:hover { background: #4a6fa5; }
+
+/* --- NEW INTERACTIVE STAR RATING (Input Form) --- */
+.star-rating-input {
+    display: flex;
+    flex-direction: row-reverse; /* Allows CSS hover logic to work backwards */
+    justify-content: flex-end;
+    gap: 10px;
+}
+.star-rating-input input { display: none; } /* Hide radio buttons */
+.star-rating-input label {
+    font-size: 2rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+/* Highlight stars on hover and check */
+.star-rating-input input:checked ~ label,
+.star-rating-input label:hover,
+.star-rating-input label:hover ~ label {
+    color: var(--ashesi-gold);
+}
+
+/* Auth Pages */
+.auth-container { display: flex; justify-content: center; align-items: center; height: 80vh; }
+.auth-card { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+.auth-card input, .auth-card select, .auth-card textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+.auth-card button { width: 100%; padding: 12px; background: var(--ashesi-maroon); color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 10px; }
+
+/* --- SEARCH BAR (Student Dashboard) --- */
+.search-container {
+    background: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+}
+
+.student-search-bar {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+    background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/svgs/solid/magnifying-glass.svg'); /* Optional icon handling */
+}
+
+.student-search-bar:focus {
+    border-color: var(--ashesi-maroon);
+    box-shadow: 0 4px 10px rgba(112, 19, 38, 0.1);
+}
+/* --- PROFESSOR PROFILE PAGE --- */
+
+/* 1. Main Header Card */
+.profile-header-card {
+    display: flex;            /* Aligns Avatar and Info side-by-side */
+    align-items: flex-start;  /* Aligns them to the top */
+    gap: 30px;                /* Spacing between avatar and text */
+    padding: 30px;
+    margin-bottom: 30px;
+    background: white;
+    /* Note: .card class handles border-radius and shadow */
+}
+
+/* 2. The Avatar Image (Fixes the huge image issue) */
+.profile-avatar-img {
+    width: 140px;             /* Enforce fixed width */
+    height: 140px;            /* Enforce fixed height */
+    border-radius: 50%;       /* Make it circular */
+    object-fit: cover;        /* Crop image nicely to fit */
+    border: 4px solid var(--ashesi-maroon);
+    flex-shrink: 0;           /* Prevent image from squishing */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    background-color: white;
+}
+
+/* Hover Effect for Avatar */
+.profile-avatar-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(112, 19, 38, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Fallback Circle (if no image) */
+/* Fallback Circle (if no image) */
+.profile-avatar-circle {
+    width: 160px !important;
+    height: 160px !important;
+    font-size: 4rem; /* Big text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50% !important;
+    background: var(--ashesi-maroon); /* Matches Dashboard Color */
+    color: white;
+    border: 5px solid white; /* Clean border like the dashboard */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+
+/* 3. Profile Info Section */
+.profile-info {
+    flex-grow: 1;             /* Take up remaining width */
+    display: flex;
+    flex-direction: column;   /* Stack Name/Dept on top of Stats */
+}
+
+.profile-info h1 {
+    font-size: 2.2rem;
+    margin: 0 0 5px 0;
+    color: var(--ashesi-maroon);
+    line-height: 1.1;
+}
+
+.profile-dept {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0 0 20px 0;
+    font-weight: 500;
+}
+
+/* 4. Scoreboard (The Stats Row) */
+.scoreboard-card {
+    display: flex;
+    align-items: center;
+    gap: 40px;                /* Space between stats */
+    background: #f8f9fa;      /* Very light gray container */
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    width: fit-content;       /* Shrink to fit content */
+}
+
+.score-box {
+    text-align: center;
+    min-width: 80px;
+}
+
+.big-score {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #333;
+    line-height: 1;
+}
+
+.score-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.score-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: bold;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Vertical Divider Lines */
+.middle-box {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 0 30px;
+}
+
+/* 5. Rate Button */
+.rate-btn-large {
+    background: var(--ashesi-maroon);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    align-self: flex-start;
+    margin-left: auto; /* Pushes button to far right */
+}
+
+.rate-btn-large:hover {
+    background: #500d1b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Responsive: Stack for Mobile */
+@media (max-width: 768px) {
+    .profile-header-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .profile-info {
+        width: 100%;
+        align-items: center;
+    }
+    .profile-info > div:first-child {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .rate-btn-large {
+        margin: 15px auto 0 auto;
+    }
+    .scoreboard-card {
+        width: 100%;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 15px;
+    }
+    .middle-box {
+        padding: 0 15px;
+    }
+}
