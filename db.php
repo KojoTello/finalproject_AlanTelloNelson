@@ -1,20 +1,16 @@
 <?php
+// Determine if we are on localhost or live server
+// Change 'localhost' to your live server IP if needed, but usually this works
+// We use 'getenv' to pull secret settings from Railway
+$servername = getenv('MYSQLHOST') ?: "localhost"; // Falls back to localhost if not found
+$username = getenv('MYSQLUSER') ?: "root";
+$password = getenv('MYSQLPASSWORD') ?: "";
+$dbname = getenv('MYSQLDATABASE') ?: "ashesi_review_db";
+$port = getenv('MYSQLPORT') ?: 3306;
 
-if (getenv('MYSQL_URL')) {
-    $url = parse_url(getenv('MYSQL_URL'));
-    $servername = $url["host"];
-    $username = $url["user"];
-    $password = $url["pass"];
-    $dbname = substr($url["path"], 1);
-    $port = $url["port"];
-    
-    $conn = new mysqli($servername, $username, $password, $dbname, $port);
-} else {
-  
-    $conn = new mysqli("localhost", "root", "", "ashesi_review_db");
-}
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    // On live sites, don't show specific errors to users (Security)
+    die("Connection failed."); 
 }
-?>
