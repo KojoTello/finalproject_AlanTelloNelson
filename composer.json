@@ -1,0 +1,8 @@
+{
+  "name": "ashesi/review-platform",
+  "description": "Ashesi Faculty Review Platform",
+  "require": {
+    "php": "^8.2",
+    "ext-mysqli": "*"
+  }
+}
